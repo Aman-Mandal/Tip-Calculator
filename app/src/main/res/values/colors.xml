@@ -10,4 +10,6 @@
     <color name="darkBlue">#1A374D</color>
     <color name="lightBlue">#406882</color>
     <color name="paleBlue">#B1D0E0</color>
+    <color name="color_worst_tip">#DC1E0B</color>
+    <color name="color_best_tip">#35BA01</color>
 </resources>

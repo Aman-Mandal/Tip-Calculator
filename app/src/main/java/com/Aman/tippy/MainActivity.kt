@@ -1,5 +1,6 @@
 package com.Aman.tippy
 
+import android.animation.ArgbEvaluator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,15 +9,18 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 
 private const val TAG = "MainActivity"
 private const val INITIAL_TIP_PERCENTAGE = 15
+
 class MainActivity : AppCompatActivity() {
     private lateinit var baseAmount_et : EditText
     private lateinit var seekbar : SeekBar
     private lateinit var tipAmount_tv : TextView
     private lateinit var totalAmount_tv : TextView
     private lateinit var tipPercentage_tv : TextView
+    private lateinit var tipDescription_tv : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,19 +31,25 @@ class MainActivity : AppCompatActivity() {
         tipAmount_tv = findViewById(R.id.tipAmount_tv)
         totalAmount_tv = findViewById(R.id.totalAmount_tv)
         tipPercentage_tv = findViewById(R.id.tipPercentage_tv)
+        tipDescription_tv = findViewById(R.id.tipDescription_tv)
 
         seekbar.progress = INITIAL_TIP_PERCENTAGE
         tipPercentage_tv.text = "$INITIAL_TIP_PERCENTAGE%"
+        updateTipDescrption(INITIAL_TIP_PERCENTAGE)
+
+        // For Seekbar
         seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 // progress : the value of seekbar
                 tipPercentage_tv.text = "$progress%"
                 computeTipAndTotal()
+                updateTipDescrption(progress)
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+
         baseAmount_et.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -50,6 +60,25 @@ class MainActivity : AppCompatActivity() {
                 computeTipAndTotal()
             }
         })
+    }
+
+    private fun updateTipDescrption(tipPercentage : Int) {
+        val tipDescription = when(tipPercentage){
+            in 0..6 -> "Poor"
+            in 7..12 -> "Average"
+            in 13..18 -> "Good"
+            in 19..24 -> "Great"
+            else -> "Amazing"
+        }
+        tipDescription_tv.text = tipDescription
+
+        // Update the Color based on Tip Percent
+        val color = ArgbEvaluator().evaluate(
+            tipPercentage.toFloat() /seekbar.max,
+            ContextCompat.getColor(this,R.color.color_worst_tip),
+            ContextCompat.getColor(this,R.color.color_best_tip)
+        ) as Int
+        tipDescription_tv.setTextColor(color)
     }
 
     private fun computeTipAndTotal() {
