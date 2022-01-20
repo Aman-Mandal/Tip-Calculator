@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Left Side View -->
     <TextView
         android:id="@+id/base_tv"
         android:layout_width="wrap_content"
@@ -18,11 +19,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/percentage_tv"
+        android:id="@+id/tipPercentage_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="24%"
+        android:text=""
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/base_tv"
@@ -35,8 +36,8 @@
         android:layout_marginTop="32dp"
         android:text="Tip"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toEndOf="@+id/percentage_tv"
-        app:layout_constraintTop_toBottomOf="@id/percentage_tv" />
+        app:layout_constraintEnd_toEndOf="@+id/tipPercentage_tv"
+        app:layout_constraintTop_toBottomOf="@id/tipPercentage_tv" />
 
     <TextView
         android:id="@+id/total_tv"
@@ -48,6 +49,7 @@
         app:layout_constraintEnd_toEndOf="@+id/tip_tv"
         app:layout_constraintTop_toBottomOf="@id/tip_tv" />
 
+    <!-- Right Side Views -->
     <EditText
         android:id="@+id/baseAmount_et"
         android:layout_width="wrap_content"
@@ -55,7 +57,7 @@
         android:layout_marginStart="32dp"
         android:ems="8"
         android:hint="Bill Amount"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/base_tv"
         app:layout_constraintStart_toEndOf="@id/base_tv"
@@ -67,31 +69,30 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:max="30"
-        app:layout_constraintBottom_toBottomOf="@+id/percentage_tv"
-        app:layout_constraintStart_toEndOf="@id/percentage_tv"
-        app:layout_constraintTop_toTopOf="@+id/percentage_tv"
-        />
+        app:layout_constraintBottom_toBottomOf="@+id/tipPercentage_tv"
+        app:layout_constraintStart_toEndOf="@id/tipPercentage_tv"
+        app:layout_constraintTop_toTopOf="@+id/tipPercentage_tv" />
 
-    <TextView
+        <TextView
+        android:id="@+id/tipAmount_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        tools:text="20"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="@+id/tip_tv"
         app:layout_constraintStart_toEndOf="@id/tip_tv"
         app:layout_constraintTop_toTopOf="@+id/tip_tv"
-         />
+        tools:text="20" />
 
     <TextView
+        android:id="@+id/totalAmount_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        tools:text="100"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="@+id/total_tv"
         app:layout_constraintStart_toEndOf="@id/total_tv"
         app:layout_constraintTop_toTopOf="@+id/total_tv"
-        />
+        tools:text="100" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
