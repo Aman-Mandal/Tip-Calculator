@@ -21,10 +21,6 @@ The following **extensions** are implemented:
 * [x] User can split the bill between their friends.
 
 
-## Notes
-
-Describe any challenges encountered while building the app.
-
 ## License
 
     Copyright [2022] [Aman Mandal]
