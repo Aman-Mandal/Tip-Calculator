@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var totalAmount_tv : TextView
     private lateinit var tipPercentage_tv : TextView
     private lateinit var tipDescription_tv : TextView
+    private lateinit var seekBarPerPerson_tv : SeekBar
+    private lateinit var splitAmount_tv : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         totalAmount_tv = findViewById(R.id.totalAmount_tv)
         tipPercentage_tv = findViewById(R.id.tipPercentage_tv)
         tipDescription_tv = findViewById(R.id.tipDescription_tv)
+        seekBarPerPerson_tv = findViewById(R.id.seekBarPerPerson_tv)
+        splitAmount_tv = findViewById(R.id.splitAmount_tv)
 
         seekbar.progress = INITIAL_TIP_PERCENTAGE
         tipPercentage_tv.text = "$INITIAL_TIP_PERCENTAGE%"
@@ -60,6 +64,30 @@ class MainActivity : AppCompatActivity() {
                 computeTipAndTotal()
             }
         })
+
+        seekBarPerPerson_tv.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                Log.i(TAG, "after sliding the bar $progress")
+                splitBill(progress)
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+        })
+
+    }
+
+    private fun splitBill(progress : Int) {
+        if(baseAmount_et.text.isEmpty()){
+            return
+        }
+        val baseAmount = baseAmount_et.text.toString().toDouble()
+        val tipAmount = tipAmount_tv.text.toString().toDouble()
+        val splitAmount = (baseAmount + tipAmount )/ progress
+
+        splitAmount_tv.text = "%.2f".format(splitAmount)
     }
 
     private fun updateTipDescrption(tipPercentage : Int) {
@@ -72,13 +100,6 @@ class MainActivity : AppCompatActivity() {
         }
         tipDescription_tv.text = tipDescription
 
-        // Update the Color based on Tip Percent
-        val color = ArgbEvaluator().evaluate(
-            tipPercentage.toFloat() /seekbar.max,
-            ContextCompat.getColor(this,R.color.color_worst_tip),
-            ContextCompat.getColor(this,R.color.color_best_tip)
-        ) as Int
-        tipDescription_tv.setTextColor(color)
     }
 
     private fun computeTipAndTotal() {
@@ -98,4 +119,6 @@ class MainActivity : AppCompatActivity() {
         totalAmount_tv.text = "%.2f".format(totalAmount)
 
     }
+
+
 }

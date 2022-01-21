@@ -12,7 +12,7 @@
         android:id="@+id/base_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="70dp"
         android:layout_marginTop="64dp"
         android:text="Base"
         android:textAllCaps="true"
@@ -85,8 +85,8 @@
         android:layout_marginStart="32dp"
         android:ems="8"
         android:hint="Bill Amount"
+        android:layout_marginEnd="8dp"
         android:inputType="numberDecimal"
-        android:padding="15dp"
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="@+id/base_tv"
         app:layout_constraintStart_toEndOf="@id/base_tv"
@@ -130,12 +130,14 @@
         android:id="@+id/seekBarPerPerson_tv"
         android:layout_marginStart="32dp"
         android:max="10"
+        android:min="1"
         app:layout_constraintStart_toEndOf="@id/split_tv"
         app:layout_constraintBottom_toBottomOf="@id/split_tv"
         app:layout_constraintTop_toTopOf="@id/split_tv"
         />
 
     <TextView
+        android:id="@+id/splitAmount_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="100"
