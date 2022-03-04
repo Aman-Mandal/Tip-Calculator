@@ -6,9 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.EditText
-import android.widget.SeekBar
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat
 
 private const val TAG = "MainActivity"
@@ -23,6 +21,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tipDescription_tv : TextView
     private lateinit var seekBarPerPerson_tv : SeekBar
     private lateinit var splitAmount_tv : TextView
+    private lateinit var btnShowDetails : Button
+
+    private var tipAmount:Double=0.0
+    private var totalAmount:Double=0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         tipDescription_tv = findViewById(R.id.tipDescription_tv)
         seekBarPerPerson_tv = findViewById(R.id.seekBarPerPerson_tv)
         splitAmount_tv = findViewById(R.id.splitAmount_tv)
+        btnShowDetails=findViewById(R.id.showDetails)
 
         seekbar.progress = INITIAL_TIP_PERCENTAGE
         tipPercentage_tv.text = "$INITIAL_TIP_PERCENTAGE%"
@@ -53,6 +56,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+        btnShowDetails.setOnClickListener {
+            Toast.makeText(this,"Total=$totalAmount,Tip Amount=$tipAmount",Toast.LENGTH_SHORT).show()
+        }
 
         baseAmount_et.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -76,6 +82,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
 
     }
 
@@ -112,8 +119,8 @@ class MainActivity : AppCompatActivity() {
         val baseAmount = baseAmount_et.text.toString().toDouble()
         val tipPercent = seekbar.progress
         // 2. Compute the Tip and Total
-        val tipAmount = baseAmount * tipPercent / 100
-        val totalAmount = baseAmount + tipAmount
+        tipAmount = baseAmount * tipPercent / 100
+        totalAmount = baseAmount + tipAmount
         // 3. Update those values in the UI
         tipAmount_tv.text = "%.2f".format(tipAmount)
         totalAmount_tv.text = "%.2f".format(totalAmount)
