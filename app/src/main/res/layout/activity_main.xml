@@ -83,9 +83,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
         android:ems="8"
         android:hint="Bill Amount"
-        android:layout_marginEnd="8dp"
         android:inputType="numberDecimal"
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="@+id/base_tv"
@@ -125,28 +125,26 @@
         tools:text="100" />
 
     <SeekBar
+        android:id="@+id/seekBarPerPerson_tv"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:id="@+id/seekBarPerPerson_tv"
         android:layout_marginStart="32dp"
         android:max="10"
         android:min="1"
-        app:layout_constraintStart_toEndOf="@id/split_tv"
         app:layout_constraintBottom_toBottomOf="@id/split_tv"
-        app:layout_constraintTop_toTopOf="@id/split_tv"
-        />
+        app:layout_constraintStart_toEndOf="@id/split_tv"
+        app:layout_constraintTop_toTopOf="@id/split_tv" />
 
     <TextView
         android:id="@+id/splitAmount_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="100"
-        app:layout_constraintStart_toEndOf="@id/perPerson_tv"
-        app:layout_constraintTop_toTopOf="@id/perPerson_tv"
-        app:layout_constraintBottom_toBottomOf="@id/perPerson_tv"
         android:layout_marginStart="32dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        />
+        app:layout_constraintBottom_toBottomOf="@id/perPerson_tv"
+        app:layout_constraintStart_toEndOf="@id/perPerson_tv"
+        app:layout_constraintTop_toTopOf="@id/perPerson_tv"
+        tools:text="100" />
 
     <!-- Footer -->
 
@@ -174,5 +172,16 @@
         app:layout_constraintStart_toStartOf="@id/seekBar"
         app:layout_constraintTop_toBottomOf="@id/seekBar"
         tools:text="Appearance" />
+
+    <Button
+        android:id="@+id/showDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Details"
+        app:layout_constraintBottom_toTopOf="@+id/footer_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/splitAmount_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
